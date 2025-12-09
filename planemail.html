@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Booking Email Preview</title>
+
+  <!-- existing system styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo" />
+    </div>
+    <div class="header-middle">Fitness Studio</div>
+    <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="services.html">Services</a>
+    <a href="membershipplans.html">Plans</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="reports.html">Reports</a>
+    <a href="clients.html">Clients</a>
+  </nav>
+
+
+  <!-- Content -->
+  <main class="content">
+
+<!---------------- EMAIL TEMPLATE START ---------------->
+
+<style>
+  body{background:#f6f6f6;}
+  .email-box {
+    max-width: 500px;
+    background: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #0002;
+    font-family: Arial;
+  }
+  h2 {margin: 0 0 10px 0;}
+  .subtitle {color: #666;}
+  .qr-img {
+    width: 200px;
+    display: block;
+    margin: 10px auto;
+  }
+  .btn {
+    background: #0094ff;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 22px;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  .flex-row{
+    display:flex;
+    justify-content: space-between;
+    margin-top:20px;
+  }
+  .small{color:#666;font-size:14px;}
+</style>
+
+
+<div class="email-box">
+	<img src="assets/images/facilities.png" width="100%" alt="Logo" />
+</div>
+
+<div class="email-box">
+
+  <!-- LOGO -->
+  <img id="emailLogo" width="130">
+
+  <h2 id="emailTitle"></h2>
+  <div class="subtitle" id="emailSubtitle"></div>
+
+  <img id="emailQRCode" class="qr-img"/>
+
+  <div id="emailDescription"></div>
+
+  <div class="flex-row">
+    <div>
+      <div id="dateLeftDay"></div>
+      <div class="small" id="dateLeftInfo"></div>
+    </div>
+
+    <div>
+      <div id="dateRightDay"></div>
+      <div class="small" id="dateRightInfo"></div>
+    </div>
+  </div>
+
+  <a id="emailButtonText" class="btn" href="#">Manage Booking</a>
+</div>
+
+
+<script>
+function loadEmailPreview() {
+
+  const encoded = new URLSearchParams(window.location.search).get("data");
+
+  const sampleData = {
+    "planId": "BK12345",
+    "service": {
+      "name": "Flex Weekly Pass",
+      "desc": "Unlimited gym access for 7 days",
+      "price": "₹1599"
+    },
+    "datetime": {
+      "fromdate": "10 Feb",
+      "todate": "17 Feb",
+      "duration": "7 Days"
+    },
+    "customer": {
+      "name": "Rahul",
+      "phone": "9876543210",
+      "email": "rahul@mail.com"
+    },
+    "payment": {
+      "method": "UPI",
+      "amount": "₹1599",
+      "status": "Paid"
+    }
+  }
+
+  const bookingData = encoded ? JSON.parse(atob(encoded)) : sampleData;
+
+
+  //emailLogo.src = "https://dummyimage.com/200x80/000/fff&text=YOUR+LOGO";
+
+  //emailLogo.src = "";
+
+  emailTitle.textContent = "Booking Confirmed!";
+  emailSubtitle.textContent = bookingData.service.name;
+
+  emailQRCode.src = `https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=${bookingData.bookingId}`;
+
+  emailDescription.innerHTML = `
+    <p><strong>${bookingData.service.name}</strong></p>
+    <p>${bookingData.service.desc}</p>
+    <p>Price : ${bookingData.service.price}</p>
+
+    <p><strong>Customer</strong></p>
+    <p>${bookingData.customer.name}</p>
+    <small>${bookingData.customer.phone} | ${bookingData.customer.email}</small>
+  `;
+
+  dateLeftDay.textContent  = bookingData.datetime.fromdate;
+  dateLeftInfo.textContent = "Duration : " + bookingData.datetime.duration;
+
+  dateRightDay.textContent = "To : " + bookingData.datetime.todate;
+  dateRightInfo.textContent = "Payment : " + bookingData.payment.amount + " (" + bookingData.payment.method + ")";
+
+  emailButtonText.textContent = "Manage Booking";
+}
+
+window.onload = loadEmailPreview;
+</script>
+
+<!---------------- EMAIL TEMPLATE END ---------------->
+
+  </main>
+
+  <!-- Footer -->
+  <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+</div>
+</body>
+</html>

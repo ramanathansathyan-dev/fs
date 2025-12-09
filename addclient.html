@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Client - Fitness Studio</title>
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Clients CSS (includes Add Client CSS) -->
+  <link rel="stylesheet" href="css/clients.css" />
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="header-middle">Fitness Studio</div>
+    <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="services.html">Services</a>
+    <a href="membershipplans.html">Plans</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="reports.html">Reports</a>
+    <a href="clients.html">Clients</a>
+  </nav>
+
+  <!-- Main Content -->
+<main class="content-wrapper">
+  <div class="client-card-wrapper">
+    <div class="card-header">Add Client</div>
+
+    <form id="addClientForm" class="add-client-form">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" required>
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" required>
+
+      <div class="form-buttons">
+        <button type="button" id="cancelAddClientBtn" onclick="cancelAdd()">Cancel</button>
+        <button type="submit" id="saveAddClientBtn">Add Client</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+
+
+
+
+
+  <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+</div>
+
+<!-- Clients JS (includes Add Client JS) -->
+<script src="js/clients.js"></script>
+
+</body>
+</html>

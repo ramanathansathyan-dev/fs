@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services - Fitness Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Header -->
+    <div class="login-header">
+      <div class="header-left">
+        <img src="assets/images/logo.png" alt="Logo" />
+      </div>
+      <div class="header-middle">Fitness Studio</div>
+      <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="mainmenu.html">Dashboard</a>
+      <a href="services.html" style="background:#F5141F; color:white;">Services</a>
+      <a href="membershipplans.html">Plans</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="reports.html">Reports</a>
+      <a href="clients.html">Clients</a>
+      <!--<a href="qrcode.html">QR Code</a>-->
+    </nav>
+
+    <!-- Content -->
+    <main class="content">
+      <div class="card-container">
+
+        <!-- Yoga -->
+        <div class="card">
+          <i class="material-icons">self_improvement</i>
+          <h3>Yoga</h3>
+          <p>Improve flexibility, balance, and mindfulness.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Yoga Classes: 1 hour, multiple time slots')">Show Details</button>
+            <!--<button class="book-btn" onclick="location.href='createbooking.html?service=Yoga'">Book Service</button>-->
+            <button class="book-btn" onclick="openBookingFlow('Yoga')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Pilates -->
+        <div class="card">
+          <i class="material-icons">fitness_center</i>
+          <h3>Pilates</h3>
+          <p>Strengthen your core and improve posture.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Pilates Classes: 1 hour, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Pilates')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Zumba -->
+        <div class="card">
+          <i class="material-icons">directions_run</i>
+          <h3>Zumba</h3>
+          <p>Fun cardio dance workouts for all levels.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Zumba Classes: 1 hour, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Zumba')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- CrossFit -->
+        <div class="card">
+          <i class="material-icons">sports_mma</i>
+          <h3>CrossFit</h3>
+          <p>High-intensity functional training.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('CrossFit: 1 hour, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('CrossFit')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Personal Training -->
+        <div class="card">
+          <i class="material-icons">person</i>
+          <h3>Personal Training</h3>
+          <p>1-on-1 training sessions tailored for you.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Personal Training: 1 hour, by appointment')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Personal Training')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- HIIT -->
+        <div class="card">
+          <i class="material-icons">flash_on</i>
+          <h3>HIIT</h3>
+          <p>High-intensity interval training for fat burn.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('HIIT Classes: 45 min, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('HIIT')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Aerobics -->
+        <div class="card">
+          <i class="material-icons">directions_walk</i>
+          <h3>Aerobics</h3>
+          <p>Cardio workouts to boost endurance.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Aerobics Classes: 1 hour, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Aerobics')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Spin / Cycling -->
+        <div class="card">
+          <i class="material-icons">pedal_bike</i>
+          <h3>Spin / Cycling</h3>
+          <p>Indoor cycling workouts for stamina.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Spin Classes: 45 min, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Spin')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Kickboxing -->
+        <div class="card">
+          <i class="material-icons">sports_mma</i>
+          <h3>Kickboxing</h3>
+          <p>Cardio and self-defense training.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Kickboxing: 1 hour, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Kickboxing')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Stretching / Mobility -->
+        <div class="card">
+          <i class="material-icons">accessibility_new</i>
+          <h3>Stretching</h3>
+          <p>Improve flexibility and recover muscles.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Stretching: 30 min, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Stretching')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Nutrition Consultation -->
+        <div class="card">
+          <i class="material-icons">restaurant_menu</i>
+          <h3>Nutrition Consultation</h3>
+          <p>Personalized diet plans for clients.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Nutrition Consultation: 30 min')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Nutrition')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Wellness / Meditation -->
+        <div class="card">
+          <i class="material-icons">spa</i>
+          <h3>Meditation</h3>
+          <p>Reduce stress and improve mental wellness.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Meditation Sessions: 30 min, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Meditation')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Functional Training -->
+        <div class="card">
+          <i class="material-icons">fitness_center</i>
+          <h3>Functional Training</h3>
+          <p>Improve core strength and mobility.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Functional Training: 1 hour, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Functional Training')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Bootcamp -->
+        <div class="card">
+          <i class="material-icons">terrain</i>
+          <h3>Bootcamp</h3>
+          <p>Outdoor high-intensity group sessions.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Bootcamp: 1 hour, outdoor sessions')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Bootcamp')">Book Service</button>
+          </div>
+        </div>
+
+        <!-- Swimming / Aqua Fitness -->
+        <div class="card">
+          <i class="material-icons">pool</i>
+          <h3>Swimming / Aqua Fitness</h3>
+          <p>Low-impact cardio workouts in water.</p>
+          <div class="btn-group">
+            <button class="show-btn" onclick="alert('Swimming / Aqua Fitness: 45 min, multiple time slots')">Show Details</button>
+            <button class="book-btn" onclick="openBookingFlow('Swimming')">Book Service</button>
+          </div>
+        </div>
+
+      </div>
+
+     </main>
+
+    <!-- Footer -->
+    <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+  </div>
+
+ <script>
+
+ function openBookingFlow(serviceName) {
+
+
+   const services = [
+  {
+    "id": "S001",
+    "name": "Yoga",
+    "description": "Improves flexibility, strength and relaxation through guided postures and breathing techniques.",
+    "price": 1200,
+    "duration": "60 mins",
+    "image": "/assets/images/yoga.jpg"
+  },
+  {
+    "id": "S002",
+    "name": "Pilates",
+    "description": "Strength training focused on posture, core and full-body conditioning.",
+    "price": 1400,
+    "duration": "55 mins",
+    "image": "/assets/images/pilates.jpg"
+  },
+  {
+    "id": "S003",
+    "name": "Zumba",
+    "description": "Fun dance-based cardio workout using Latin and international rhythms.",
+    "price": 1000,
+    "duration": "50 mins",
+    "image": "/assets/images/zumba.jpg"
+  },
+  {
+    "id": "S004",
+    "name": "CrossFit",
+    "description": "High-intensity functional training that builds strength and endurance.",
+    "price": 1800,
+    "duration": "60 mins",
+    "image": "/assets/images/crossfit.jpg"
+  },
+  {
+    "id": "S005",
+    "name": "Personal Training",
+    "description": "One-to-one customized workout program including guidance and tracking.",
+    "price": 2500,
+    "duration": "60 mins",
+    "image": "/assets/images/personaltraining.jpg"
+  },
+  {
+    "id": "S006",
+    "name": "HIIT",
+    "description": "Short high-intensity interval training to burn more calories in less time.",
+    "price": 1500,
+    "duration": "40 mins",
+    "image": "/assets/images/hiit.jpg"
+  },
+  {
+    "id": "S007",
+    "name": "Aerobics",
+    "description": "Rhythmic movement workout focused on fat-burning and stamina building.",
+    "price": 900,
+    "duration": "50 mins",
+    "image": "/assets/images/aerobics.jpg"
+  },
+  {
+    "id": "S008",
+    "name": "Spin",
+    "description": "Indoor cycling class improving cardiovascular fitness and leg strength.",
+    "price": 1300,
+    "duration": "45 mins",
+    "image": "/assets/images/spin.jpg"
+  },
+  {
+    "id": "S009",
+    "name": "Kickboxing",
+    "description": "Full-body martial arts based workout improving strength, agility and stamina.",
+    "price": 1600,
+    "duration": "55 mins",
+    "image": "/assets/images/kickboxing.jpg"
+  },
+  {
+    "id": "S010",
+    "name": "Stretching",
+    "description": "Mobility and flexibility session to release stiffness and improve posture.",
+    "price": 800,
+    "duration": "40 mins",
+    "image": "/assets/images/stretching.jpg"
+  },
+  {
+    "id": "S011",
+    "name": "Nutrition",
+    "description": "Personal diet consultation and nutrition planning for fitness goals.",
+    "price": 2000,
+    "duration": "45 mins",
+    "image": "/assets/images/nutrition.jpg"
+  },
+
+  {
+      "id": "S012",
+      "name": "Swimming",
+      "description": "Low-impact cardio workouts in water.",
+      "price": 2000,
+      "duration": "45 mins",
+      "image": "/assets/images/swimming.jpg"
+  },
+
+  {
+        "id": "S013",
+        "name": "Meditation",
+        "description": "Reduce stress and improve mental wellness.",
+        "price": 2000,
+        "duration": "45 mins",
+        "image": "/assets/images/meditation.jpg"
+  },
+
+  {
+        "id": "S014",
+        "name": "Bootcamp",
+        "description": "Outdoor high-intensity group sessions",
+        "price": 2000,
+        "duration": "45 mins",
+        "image": "/assets/images/bootcamp.jpg"
+  },
+  {
+          "id": "S015",
+          "name": "Functional Training",
+          "description": "Improve core strength and mobility.",
+          "price": 2000,
+          "duration": "45 mins",
+          "image": "/assets/images/functionaltraining.jpg"
+  }
+
+
+
+]
+
+
+   // find match
+   const selected = services.find(service => service.name === serviceName);
+
+   // json encode
+   const encodedData = encodeURIComponent(JSON.stringify(selected));
+
+   // redirect
+   window.location.href = "createbooking.html?data=" + encodedData;
+
+ }
+ </script>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment - Fitness Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <img src="/assets/images/logo.png" class="logo" alt="Logo">
+    <span>Fitness Studio</span>
+  </div>
+</header>
+
+<div class="main" style="padding:20px;">
+  <h2>Payment</h2>
+  <p>Amount: $<span id="amount"></span></p>
+  <label>Payment Status:</label>
+  <select id="status" style="width:100%; padding:8px; margin:10px 0;">
+    <option value="Paid">Paid</option>
+    <option value="Unpaid">Unpaid</option>
+  </select>
+  <button class="btn book" onclick="confirmPayment(document.getElementById('amount').innerText, document.getElementById('status').value)">Confirm Payment</button>
+</div>
+
+<footer>
+&copy; 2025 Fitness Studio. All rights reserved.
+</footer>
+
+<script>
+document.getElementById('amount').innerText = bookingData.amount || '50';
+</script>
+</body>
+</html>

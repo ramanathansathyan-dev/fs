@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Main Menu - Fitness Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Header -->
+    <div class="login-header">
+      <div class="header-left">
+        <img src="assets/images/logo.png" alt="Logo" />
+      </div>
+      <div class="header-middle">Fitness Studio</div>
+      <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="services.html">Services</a>
+      <a href="membershipplans.html">Plans</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="reports.html">Reports</a>
+      <a href="clients.html">Clients</a>
+      <!--<a href="qrcode.html">QR Code</a>-->
+    </nav>
+
+    <!-- Content -->
+    <!-- Content Section with Cards -->
+	<main class="content">
+	  <!--<h2 style="color:#F5141F; margin-bottom:20px;">Welcome! Select a Task</h2>-->
+
+	  <div class="card-container">
+	    <!-- Dashboard Card -->
+	    <div class="card">
+	      <i class="material-icons">dashboard</i>
+	      <h3>Dashboard</h3>
+	      <p>View current bookings, revenue, memberships, and analytics.</p>
+	      <div class="btn-group">
+	        <button class="book-btn" onclick="window.location.href='dashboard.html'">Open</button>
+	      </div>
+	    </div>
+
+	    <!-- Services Card -->
+	    <div class="card">
+	      <i class="material-icons">fitness_center</i>
+	      <h3>Services</h3>
+	      <p>View all available services and pricing.</p>
+	      <div class="btn-group">
+	        <button class="book-btn" onclick="window.location.href='services.html'">Show Details</button>
+	      </div>
+	    </div>
+
+	    <!-- Membership Plans Card -->
+	    <div class="card">
+	      <i class="material-icons">card_membership</i>
+	      <h3>Membership Plans</h3>
+	      <p>View monthly, yearly, or custom membership plans.</p>
+	      <div class="btn-group">
+	        <button class="book-btn" onclick="window.location.href='membershipplans.html'">Show Details</button>
+	      </div>
+	    </div>
+
+	    <!-- Booking Card -->
+	    <div class="card">
+	      <i class="material-icons">event_available</i>
+	      <h3>Booking</h3>
+	      <p>Book a service for a client and manage slots.</p>
+	      <div class="btn-group">
+	        <button class="book-btn" onclick="window.location.href='services.html'">Book</button>
+	      </div>
+	    </div>
+
+
+
+	    <!-- Reports Card -->
+	    <div class="card">
+	      <i class="material-icons">assessment</i>
+	      <h3>Reports</h3>
+	      <p>View detailed reports on bookings, payments, and revenue.</p>
+	      <div class="btn-group">
+	        <button class="book-btn" onclick="window.location.href='reports.html'">View</button>
+	      </div>
+	    </div>
+	    <!-- Memership Managment Card -->
+			    <div class="card">
+				  <i class="material-icons">group</i>
+				  <h3>Clients</h3>
+				  <p>Manage clients, memberships, and check-in QR codes.</p>
+				  <div class="btn-group">
+				    <!--<button class="show-btn" onclick="location.href='clients.html'">Show Details</button>-->
+				    <button class="book-btn" onclick="location.href='clients.html'">Manage Clients</button>
+				  </div>
+		</div>
+
+		 <!-- QR Code Card -->
+			    <div class="card">
+			      <i class="material-icons">qr_code</i>
+			      <h3>QR Code</h3>
+			      <p>Generate QR codes for client check-in.</p>
+			      <div class="btn-group">
+			        <button class="book-btn" onclick="window.location.href='bookings.html'">Generate</button>
+			      </div>
+			    </div>
+
+			    <!-- Send Email Card -->
+			    <div class="card">
+			      <i class="material-icons">email</i>
+			      <h3>Send Email</h3>
+			      <p>Send confirmation emails to clients.</p>
+			      <div class="btn-group">
+			        <button class="book-btn" onclick="window.location.href='sendemail.html'">Send</button>
+			      </div>
+	    </div>
+
+
+	  </div>
+	</main>
+
+
+    <!-- Footer -->
+    <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Booking Confirmation - Fitness Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+/* Match createbooking card layout */
+
+.booking-module {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.booking-module h3 {
+	padding:10px;
+}
+/* Card */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    padding: 0 !important;
+}
+
+/* Inner layout */
+.payment-card {
+    padding: 20px !important;
+}
+
+.payment-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #000 !important;          /* BLACK header */
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+/* Rows */
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Boxes */
+.pay-box {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e4e4e4;
+}
+
+.pay-box i {
+    font-size: 26px;
+    color: #444;
+}
+
+.pay-box span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Layout rows */
+.top-row, .second-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+
+@media (min-width: 992px) {
+    .top-row, .second-row {
+        flex-direction: row;
+    }
+    .card {
+        flex: 1;
+    }
+}
+
+/* QR image */
+.qr-container {
+    padding: 25px;
+    text-align: center;
+}
+
+.qr-container img {
+    width: 200px;
+    height: 200px;
+}
+
+.booking-id {
+    margin-top: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+}
+
+.top-row, .second-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;   /* spacing in mobile */
+}
+
+@media (min-width: 992px) {
+    .top-row, .second-row {
+        flex-direction: row;
+        gap: 24px;    /* ✨ spacing between cards in large screens */
+        padding:10px;
+    }
+
+    .card {
+        flex: 1;
+        margin: 0;   /* prevents cards from touching */
+    }
+}
+
+/* BUTTONS STYLING */
+.card-buttons {
+    display: flex;
+    justify-content: flex-end; /* align to right */
+    gap: 15px;                 /* space between buttons */
+    margin-top: 30px;          /* space from cards */
+}
+
+.card-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.card-buttons .btn-back {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.card-buttons .btn-back:hover {
+    background-color: #ddd;
+}
+
+.card-buttons .btn-sendmail {
+    background-color: #007bff; /* blue */
+    color: #fff;
+}
+
+.card-buttons .btn-sendmail:hover {
+    background-color: #0056b3; /* darker blue on hover */
+}
+
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="login-header">
+        <div class="header-left"><img src="assets/images/logo.png"></div>
+        <div class="header-middle">Fitness Studio</div>
+        <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+    </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+    <a href="mainmenu.html">Dashboard</a>
+    <a href="services.html">Services</a>
+    <a href="membershipplans.html">Plans</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="reports.html">Reports</a>
+    <a href="clients.html">Clients</a>
+    <!--<a href="qrcode.html">QR Code</a>-->
+</nav>
+
+<!-- MODULE -->
+<div class="booking-module">
+    <h3>Booking Confirmation</h3>
+
+    <!-- TOP ROW -->
+    <div class="top-row">
+
+        <!-- CARD 1: QR + Reference ID -->
+        <div class="card">
+            <div class="qr-container">
+                <img id="qrImage" src="" alt="QR Code">
+                <div class="booking-id">Reference: <span id="refId"></span></div>
+            </div>
+        </div>
+
+        <!-- CARD 2: Service Info -->
+        <div class="card">
+            <div class="payment-card">
+                <h3>Service Info</h3>
+                <div class="payment-options">
+                    <div class="pay-box">
+                        <i class="material-icons">self_improvement</i>
+                        <span id="serviceName"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">schedule</i>
+                        <span id="serviceDesc"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">attach_money</i>
+                        <span id="servicePrice"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SECOND ROW -->
+    <div class="second-row">
+
+        <!-- CARD 3: Date & Time -->
+        <div class="card">
+            <div class="payment-card">
+                <h3>Date & Time</h3>
+                <div class="payment-options">
+                    <div class="pay-box">
+                        <i class="material-icons">calendar_today</i>
+                        <span id="fromdateInput"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">schedule</i>
+                        <span id="todatenput"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">hourglass_bottom</i>
+                        <span id="durationInput"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 4: Customer Details -->
+        <div class="card">
+            <div class="payment-card">
+                <h3>Customer Details</h3>
+                <div class="payment-options">
+                    <div class="pay-box">
+                        <i class="material-icons">person</i>
+                        <span id="custName"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">phone</i>
+                        <span id="custPhone"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">email</i>
+                        <span id="custEmail"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 5: Payment -->
+        <div class="card">
+            <div class="payment-card">
+                <h3>Payment</h3>
+                <div class="payment-options">
+                    <div class="pay-box">
+                        <i class="material-icons">payments</i>
+                        <span id="selectedMethod"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">price_change</i>
+                        <span id="selectedAmount"></span>
+                    </div>
+                    <div class="pay-box">
+                        <i class="material-icons">task_alt</i>
+                        <span id="selectedStatus"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+		<!-- BUTTONS CONTAINER -->
+		<div class="card-buttons">
+		    <button class="btn-back" onclick="history.back()">Back</button>
+		    <button class="btn-sendmail" onclick="sendBookingMail()">Send Mail</button>
+		</div>
+
+</div>
+
+<footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+<!-- SCRIPT: Decode Base64 Booking Data -->
+<script>
+let bookingData; // define at the top of your script
+
+function loadBookingData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const encoded = urlParams.get("data");
+
+    if (!encoded) {
+        alert("Missing booking data!");
+        return;
+    }
+
+    try {
+        const decoded = atob(encoded);
+        //const bookingData = JSON.parse(decoded);
+         bookingData = JSON.parse(decoded);
+
+        document.getElementById("qrImage").src =
+            "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + bookingData.bookingId;
+
+        document.getElementById("refId").textContent = bookingData.bookingId;
+
+        document.getElementById("serviceName").textContent = bookingData.service.name;
+        document.getElementById("serviceDesc").textContent = bookingData.service.desc;
+        document.getElementById("servicePrice").textContent = bookingData.service.price;
+
+        document.getElementById("fromdateInput").textContent = bookingData.datetime.fromdate;
+        document.getElementById("todatenput").textContent = bookingData.datetime.todate;
+        document.getElementById("durationInput").textContent = bookingData.datetime.duration;
+
+        document.getElementById("custName").textContent = bookingData.customer.name;
+        document.getElementById("custPhone").textContent = bookingData.customer.phone;
+        document.getElementById("custEmail").textContent = bookingData.customer.email;
+
+        document.getElementById("selectedMethod").textContent = bookingData.payment.method;
+        document.getElementById("selectedAmount").textContent = bookingData.payment.amount;
+        document.getElementById("selectedStatus").textContent = bookingData.payment.status;
+
+    } catch (e) {
+        console.error(e);
+        alert("Invalid booking data!");
+    }
+}
+
+window.onload = loadBookingData;
+</script>
+
+<script>
+function sendBookingMail() {
+    alert("Booking confirmation email sent! (Preview)");
+
+    // Make sure bookingData exists globally or pass it properly
+    const encoded = btoa(JSON.stringify(bookingData));
+
+    // Redirect to the preview page with encoded data
+    window.location.href = "planemail.html?data=" + encoded;
+}
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Membership Plans - Fitness Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Header -->
+    <div class="login-header">
+      <div class="header-left">
+        <img src="assets/images/logo.png" alt="Logo" />
+      </div>
+      <div class="header-middle">Fitness Studio</div>
+      <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="services.html">Services</a>
+      <a href="membershipplans.html">Plans</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="reports.html">Reports</a>
+      <a href="clients.html">Clients</a>
+    </nav>
+
+    <!-- Content -->
+    <main class="content">
+      <!-- Weekly Plan -->
+	  <div class="card">
+	    <i class="material-icons">calendar_view_week</i>
+	    <h3>Flex Weekly Pass</h3>
+	    <p>Unlimited access for 7 days. <br><strong>$15</strong></p>
+	    <div class="btn-group">
+	      <button class="show-btn" onclick="alert('Valid for 7 days')">Show Details</button>
+	      <button class="book-btn" onclick="choosePlan('weekly')">Select Plan</button>
+
+	    </div>
+	  </div>
+
+
+	  <!-- Monthly Plan -->
+	  <div class="card">
+	    <i class="material-icons">calendar_month</i>
+	    <h3>Momentum Monthly</h3>
+	    <p>Unlimited access + classes. <br><strong>$50</strong></p>
+	    <div class="btn-group">
+	      <button class="show-btn" onclick="alert('Valid for 30 days')">Show Details</button>
+	       <button class="book-btn" onclick="choosePlan('monthly')">Select Plan</button>
+	    </div>
+	  </div>
+
+
+	  <!-- Quarterly Plan -->
+	  <div class="card">
+	    <i class="material-icons">calendar_view_month</i>
+	    <h3>QuarterPower (3M)</h3>
+	    <p>Best value for 3 months. <br><strong>$140</strong></p>
+	    <div class="btn-group">
+	      <button class="show-btn" onclick="alert('Valid for 3 months')">Show Details</button>
+	      <button class="book-btn" onclick="choosePlan('quarterly')">Select Plan</button>
+	    </div>
+	  </div>
+
+
+	  <!-- Yearly Plan -->
+	  <div class="card">
+	    <i class="material-icons">event</i>
+	    <h3>Elite Annual</h3>
+	    <p>Unlimited access all year. <br><strong>$500</strong></p>
+	    <div class="btn-group">
+	      <button class="show-btn" onclick="alert('Valid for 12 months')">Show Details</button>
+	      <button class="book-btn" onclick="choosePlan('annual')">Select Plan</button>
+	    </div>
+	  </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+  </div>
+
+  <script>
+
+  const PLANS = {
+    weekly: {
+      plan: "Flex Weekly Pass",
+      description: "Short access for workouts.",
+      price: "$499"
+    },
+    monthly: {
+      plan: "Momentum Monthly",
+      description: "Full access per month.",
+      price: "$1499"
+    },
+    quarterly: {
+      plan: "QuarterPower",
+      description: "3 months full access.",
+      price: "$3999"
+    },
+    annual: {
+      plan: "Elite Annual",
+      description: "1 year access.",
+      price: "$9999"
+    }
+  };
+
+  function choosePlan(key){
+      const planObject = PLANS[key];
+      const encoded = encodeURIComponent(JSON.stringify(planObject));
+      window.location.href = "createplan.html?data=" + encoded;
+  }
+
+
+
+
+  </script>
+
+
+</body>
+</html>

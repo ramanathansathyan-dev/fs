@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clients - Fitness Studio</title>
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Clients Page CSS -->
+  <link rel="stylesheet" href="css/clients.css" />
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="header-middle">Fitness Studio</div>
+    <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+  </div>
+
+   <!-- Navigation -->
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="membershipplans.html">Plans</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="reports.html">Reports</a>
+        <a href="clients.html">Clients</a>
+       <!-- <a href="qrcode.html">QR Code</a>-->
+    </nav>
+
+  <main class="content">
+
+	<!-- Clients Header + Search + Add -->
+	<div class="clients-toolbar">
+	  <h2 class="page-title">Clients</h2>
+	  <div class="toolbar-actions">
+		<input type="text" id="clientSearch" placeholder="Search clients by name, ID, or phone...">
+			<a href="addclient.html" class="add-btn" id="addClientBtn">
+		  	<span class="material-symbols-rounded">person_add</span> Add Client
+		</a>
+	  </div>
+	</div>
+
+
+
+    <!-- Desktop Table -->
+
+    <table class="client-table">
+      <thead>
+        <tr>
+          <th>Client ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody id="clientTableBody">
+        <!-- Dynamic rows populated via JS -->
+      </tbody>
+    </table>
+
+    <!-- Mobile Cards -->
+    <div class="client-cards" id="clientCards">
+      <!-- Dynamic cards populated via JS -->
+    </div>
+
+    <!-- Load More -->
+    <button id="loadMoreBtn" class="btn save">Load More</button>
+
+  </main>
+
+  <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+</div>
+
+<!-- Add/Edit Client Modal -->
+<div id="editModal" class="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <span class="material-symbols-rounded modal-close" id="closeModalBtn">close</span>
+    <h2>Edit Client</h2>
+    <form id="editClientForm">
+      <label for="editFirstName">First Name</label>
+      <input type="text" id="editFirstName" required>
+
+      <label for="editLastName">Last Name</label>
+      <input type="text" id="editLastName" required>
+
+      <label for="editEmail">Email</label>
+      <input type="email" id="editEmail" required>
+
+      <label for="editPhone">Phone</label>
+      <input type="tel" id="editPhone" required>
+
+      <div class="modal-buttons">
+        <button type="button" class="btn cancel" id="cancelEditBtn">Cancel</button>
+        <button type="submit" class="btn save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Clients Page JS -->
+<script src="js/clients.js"></script>
+
+
+
+</body>
+</html>

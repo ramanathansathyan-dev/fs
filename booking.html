@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Booking - Fitness Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Header -->
+    <div class="login-header">
+      <div class="header-left">
+        <img src="assets/images/logo.png" alt="Logo" />
+      </div>
+      <div class="header-middle">Fitness Studio</div>
+      <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="mainmenu.html">Dashboard</a>
+      <a href="services.html">Services</a>
+      <a href="membershipplans.html">Membership Plans</a>
+      <a href="booking.html" style="background:#F5141F; color:white;">Booking</a>
+      <a href="reports.html">Reports</a>
+      <a href="qrcode.html">QR Code</a>
+      <a href="clients.html">Clients</a>
+    </nav>
+
+    <!-- Content -->
+    <main class="content">
+      <h2 style="color:#F5141F; margin-bottom:20px;">Book a Service / Membership</h2>
+
+      <div style="max-width:600px; margin:0 auto; background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+
+        <form id="bookingForm">
+          <label for="clientName">Client Name:</label>
+          <input type="text" id="clientName" name="clientName" placeholder="Enter client name" required />
+
+          <label for="serviceSelect">Service / Plan:</label>
+          <input type="text" id="serviceSelect" name="serviceSelect" placeholder="Selected service will appear here" readonly />
+
+          <label for="date">Booking Date:</label>
+          <input type="date" id="date" name="date" required />
+
+          <label for="timeSlot">Time Slot:</label>
+          <select id="timeSlot" name="timeSlot" required>
+            <option value="">Select Time Slot</option>
+            <option value="6:00-7:00 AM">6:00-7:00 AM</option>
+            <option value="7:00-8:00 AM">7:00-8:00 AM</option>
+            <option value="8:00-9:00 AM">8:00-9:00 AM</option>
+            <option value="5:00-6:00 PM">5:00-6:00 PM</option>
+            <option value="6:00-7:00 PM">6:00-7:00 PM</option>
+          </select>
+
+          <label for="paymentStatus">Payment Status:</label>
+          <select id="paymentStatus" name="paymentStatus" required>
+            <option value="">Select</option>
+            <option value="Paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+          </select>
+
+          <div class="btn-group" style="margin-top:15px;">
+            <button type="button" class="show-btn" onclick="showBookingDetails()">Show Details</button>
+            <button type="submit" class="book-btn">Confirm Booking & Generate QR</button>
+          </div>
+        </form>
+
+        <div id="bookingSummary" style="margin-top:20px;"></div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+  </div>
+
+  <script>
+    // Read service/plan from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedService = urlParams.get('service') || urlParams.get('plan');
+    if(selectedService){
+      document.getElementById('serviceSelect').value = selectedService;
+    }
+
+    function showBookingDetails(){
+      const client = document.getElementById('clientName').value;
+      const service = document.getElementById('serviceSelect').value;
+      const date = document.getElementById('date').value;
+      const slot = document.getElementById('timeSlot').value;
+      const payment = document.getElementById('paymentStatus').value;
+
+      if(!client || !service || !date || !slot || !payment){
+        alert('Please fill all fields to see details');
+        return;
+      }
+
+      document.getElementById('bookingSummary').innerHTML = `
+        <h3>Booking Details</h3>
+        <p><strong>Client:</strong> ${client}</p>
+        <p><strong>Service/Plan:</strong> ${service}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Time Slot:</strong> ${slot}</p>
+        <p><strong>Payment Status:</strong> ${payment}</p>
+      `;
+    }
+
+    // Form submission
+    document.getElementById('bookingForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const client = document.getElementById('clientName').value;
+      const service = document.getElementById('serviceSelect').value;
+      const slot = document.getElementById('timeSlot').value;
+      const payment = document.getElementById('paymentStatus').value;
+
+      if(!client || !service || !slot || !payment){
+        alert('Please fill all fields before confirming booking');
+        return;
+      }
+
+      // Redirect to QR Code page with booking details
+      const query = `?client=${encodeURIComponent(client)}&service=${encodeURIComponent(service)}&slot=${encodeURIComponent(slot)}`;
+      window.location.href = `qrcode.html${query}`;
+    });
+  </script>
+</body>
+</html>

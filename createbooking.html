@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Booking - Fitness Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+/* ===============================
+   GLOBAL CARD + LAYOUT SETTINGS
+================================ */
+
+.booking-module {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.booking-module h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+}
+
+/* Base Card */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Image Card */
+.card-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Payment-style internal layout */
+.payment-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.payment-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+/* Options inside cards */
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual rows inside card */
+.pay-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.25s ease-in-out;
+}
+
+/* Icons */
+.pay-box i {
+    font-size: 26px;
+    color: #444;
+}
+
+/* Text */
+.pay-box span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Hover effect ONLY for payment method card */
+.payment-info .pay-box:hover {
+    background: #fff4f4;
+    border-color: #f5141f;
+}
+
+.payment-card .pay-box:hover {
+    background: #f9f9f9; /* keep original background */
+    border-color: #e5e5e5; /* keep original border */
+    cursor: default; /* optional, remove pointer cursor */
+}
+
+
+/* ===============================
+   ROW STRUCTURE
+================================ */
+
+.top-row,
+.second-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Desktop layout */
+@media (min-width: 992px) {
+
+    .top-row,
+    .second-row {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    /* All cards same height */
+    .top-row .card,
+    .second-row .card {
+        flex: 1;
+        display: flex;
+    }
+
+    /* Ensure internal padding scales */
+    .payment-card {
+        height: 100%;
+    }
+}
+
+/* Mobile improvements */
+@media (max-width: 576px) {
+    .payment-card {
+        padding: 16px;
+    }
+
+    .pay-box {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .pay-box i {
+        font-size: 22px;
+    }
+
+    .pay-box span {
+        font-size: 13px;
+    }
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.card-buttons button {
+    background: #2196f3;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 18px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.card-buttons button:hover {
+    background: #0b7dda;
+}
+
+.card-buttons button:disabled {
+    background: #90caf9;
+    cursor: not-allowed;
+}
+
+
+.select-customer-btn {
+    background: #2196f3;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.select-customer-btn:hover {
+    background: #0b7dda;
+}
+
+
+</style>
+
+
+
+<style>
+
+/* DRAWER OVERLAY */
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    justify-content: flex-end;
+    z-index: 9999;
+}
+
+/* DRAWER PANEL */
+.drawer-panel {
+    width: 350px;
+    max-width: 85%;
+    height: 100%;
+    background: #fff;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* WHEN OPEN */
+.drawer-overlay.open .drawer-panel {
+    transform: translateX(0);
+}
+
+/* HEADER */
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.drawer-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* CLOSE BUTTON */
+.drawer-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* CUSTOMER LIST */
+.drawer-list {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.drawer-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.drawer-item:hover {
+    border-color: #2196f3;
+    background: #eef7ff;
+}
+
+/* ICON */
+.drawer-avatar {
+    font-size: 32px;
+    color: #555;
+}
+
+
+/* SEARCH BAR */
+.drawer-search {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    background: #f3f3f3;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.drawer-search i {
+    color: #777;
+    margin-right: 8px;
+}
+
+.drawer-search input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    width: 100%;
+}
+
+
+.drawer-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    justify-content: flex-end;
+    z-index: 9999;
+    opacity: 0;
+    transition: 0.2s ease;
+}
+
+.drawer-overlay.open {
+    opacity: 1;
+}
+
+.drawer {
+    width: 320px;
+    max-width: 80%;
+    background: white;
+    height: 100%;
+    transform: translateX(100%);
+    transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer-overlay.open .drawer {
+    transform: translateX(0);
+}
+
+.drawer-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.drawer-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-btn {
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.drawer-list {
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.drawer-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.drawer-item:hover {
+    background: #ececec;
+}
+
+.drawer-avatar {
+    font-size: 32px;
+    color: #444;
+}
+
+
+#timeDrawer {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 360px;
+    height: 100%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+    transition: 0.3s ease-in-out;
+    z-index: 9999;
+    overflow-y: auto;
+}
+
+#timeDrawer.open {
+    right: 0;
+}
+
+/* Calendar card */
+.calendar-card {
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    border: none;
+    background: #eee;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.calendar-header span {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Calendar grid */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-grid div {
+    padding: 10px 0;
+    background: #fff;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.calendar-grid .selected {
+    background: #f5141f;
+    color: white;
+    border-color: #f5141f;
+}
+
+/* Time slots */
+.time-slot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.time-slot-grid .slot {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.time-slot-grid .slot.selected {
+    background: #f5141f;
+    color: white;
+    border-color: #f5141f;
+}
+
+/* Buttons */
+.apply-btn, .cancel-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.apply-btn {
+    background: #f5141f;
+    color: #fff;
+}
+
+.cancel-btn {
+    background: #ddd;
+}
+
+/* Drawer Title */
+#timeDrawer h3 {
+    font-size: 16px;        /* reduced size */
+    margin-bottom: 12px;
+    padding-bottom: 5px;
+}
+
+/* Add padding between sections */
+.calendar-card {
+    margin-bottom: 25px;     /* more spacing */
+}
+
+.time-slot-grid {
+    margin-bottom: 25px;     /* more spacing */
+}
+
+/* Apply Button → BLUE */
+.apply-btn {
+    background: #2196f3 !important;  /* blue */
+    color: #fff;
+}
+
+.apply-btn:hover {
+    background: #1976d2 !important;  /* darker blue */
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="login-header">
+        <div class="header-left"><img src="assets/images/logo.png"></div>
+        <div class="header-middle">Fitness Studio</div>
+        <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+    </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+    <a href="mainmenu.html">Dashboard</a>
+    <a href="services.html" style="background:#F5141F; color:white;">Services</a>
+    <a href="membershipplans.html">Plans</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="reports.html">Reports</a>
+    <a href="clients.html">Clients</a>
+    <!--<a href="qrcode.html">QR Code</a>-->
+</nav>
+
+<!-- BOOKING MODULE -->
+<div class="booking-module">
+
+    <h3>Book Service</h3>
+
+    <!-- TOP ROW -->
+    <div class="top-row">
+        <!-- Card 1: Image -->
+        <div class="card card-image">
+        <img  id="serviceImage" src="/assets/images/yoga.jpg" alt="Service">
+        </div>
+
+        <!-- Card 2: Service Info -->
+        <div class="card service-info-card">
+            <div class="payment-card">
+			    <div class="payment-options">
+			        <div class="pay-box">
+			            <i class="material-icons">self_improvement</i>
+			            <span id="serviceName">Yoga</span>
+			        </div>
+			        <div class="pay-box">
+			            <i class="material-icons">schedule</i>
+			            <span id="durationInput">1 Hour</span>
+			        </div>
+			        <div class="pay-box">
+			            <i class="material-icons">attach_money</i>
+			            <span id="servicePrice">60 USD</span>
+			        </div>
+			    </div>
+			</div>
+
+        </div>
+    </div>
+
+    <!-- SECOND ROW -->
+    <div class="second-row">
+
+        <!-- Card 3: Selected Date & Time -->
+        <div class="card card-selected-info">
+            <div class="payment-card">
+			    <h3>Date & Time</h3>
+
+			    <button class="select-customer-btn" onclick="openTimeDrawer()">
+			        <i class="material-icons">event</i> Select date
+			    </button>
+
+			    <div class="payment-options">
+				    <div class="pay-box">
+				        <i class="material-icons">calendar_today</i>
+				        <span id="dateInput">Date</span>
+				    </div>
+				    <div class="pay-box">
+				        <i class="material-icons">schedule</i>
+				        <span id="timeInput">Time</span>
+				    </div>
+				    <div class="pay-box">
+				        <i class="material-icons">hourglass_bottom</i>
+				        <span id="durationInput">Duration</span>
+				    </div>
+				</div>
+
+			</div>
+
+
+        </div>
+
+        <!-- Card 4: Customer Details -->
+        <div class="card customer-info">
+		    <div class="payment-card">
+		        <h3>Customer Details</h3>
+
+		        <button class="select-customer-btn" onclick="openCustomerDrawer()">
+				    <i class="material-icons">person_search</i> Select Customer
+				</button>
+
+
+		        <div class="payment-options">
+		            <div class="pay-box">
+		                <i class="material-icons">person</i>
+		                <span id="custName">Name:</span>
+		            </div>
+		            <div class="pay-box">
+		                <i class="material-icons">phone</i>
+		                <span id="custPhone">Contact:</span>
+		            </div>
+		            <div class="pay-box">
+		                <i class="material-icons">email</i>
+		                <span id="custEmail">Email:</span>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+
+		<div class="card payment-info">
+			<div class="payment-card">
+			   <h3>Payment</h3>
+			   <button class="select-customer-btn" onclick="openPaymentDrawer()">
+					<i class="material-icons">payment</i> Select Payment
+			   </button>
+
+			   <div class="payment-options">
+			       <div class="pay-box">
+			           <i class="material-icons">payments</i>
+			           <span id="selectedMethod">Method</span>
+			       </div>
+			       <div class="pay-box">
+			           <i class="material-icons">price_change</i>
+			           <span id="selectedAmount">Amount</span>
+			       </div>
+			       <div class="pay-box">
+			           <i class="material-icons">task_alt</i>
+			           <span id="selectedStatus">Status</span>
+			       </div>
+			   </div>
+
+
+
+			</div>
+
+		</div>
+
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="card-buttons">
+        <button onclick="history.back()">Back</button>
+        <button id="confirmBtn" onclick="confirmBookingFromCreatePage()">Confirm</button>
+
+    </div>
+
+
+
+</div>
+
+<footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+
+
+
+<!-- CUSTOMER SIDE DRAWER -->
+<div id="customerDrawer" class="drawer-overlay">
+    <div class="drawer-panel">
+
+        <div class="drawer-header">
+            <h2>Select Customer</h2>
+            <button class="drawer-close" onclick="closeCustomerDrawer()">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+
+        <div class="drawer-search">
+		    <i class="material-icons">search</i>
+		    <input type="text" id="customerSearch" placeholder="Search customer..." onkeyup="filterCustomers()">
+		</div>
+
+		<div id="customerList" class="drawer-list"></div>
+
+    </div>
+</div>
+
+<!-- PAYMENT METHOD DRAWER -->
+<div id="paymentDrawer" class="drawer-overlay">
+    <div class="drawer">
+        <div class="drawer-header">
+            <h3>Select Payment Method</h3>
+            <button class="close-btn" onclick="closePaymentDrawer()">×</button>
+        </div>
+
+        <div class="drawer-list" id="paymentList">
+            <!-- Auto-generated -->
+        </div>
+    </div>
+</div>
+
+/*------------------------*/
+
+<div id="timeDrawer" class="side-drawer">
+
+    <h3>Select Date & Time</h3>
+
+    <!-- Calendar -->
+    <div class="calendar-card">
+        <div class="calendar-header">
+            <button id="prevMonth"><i class="material-icons">chevron_left</i></button>
+            <span id="calendarMonth">January 2025</span>
+            <button id="nextMonth"><i class="material-icons">chevron_right</i></button>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <h4>Select Time Slot</h4>
+
+    <!-- Time Slot Grid -->
+    <div class="time-slot-grid">
+        <div class="slot">6:00 AM - 7:00 AM</div>
+        <div class="slot">7:00 AM - 8:00 AM</div>
+        <div class="slot">8:00 AM - 9:00 AM</div>
+        <div class="slot">9:00 AM - 10:00 AM</div>
+        <div class="slot">4:00 PM - 5:00 PM</div>
+        <div class="slot">5:00 PM - 6:00 PM</div>
+        <div class="slot">6:00 PM - 7:00 PM</div>
+        <div class="slot">7:00 PM - 8:00 PM</div>
+    </div>
+
+    <button class="apply-btn" onclick="applyTimeSelection()">Apply</button>
+    <button class="cancel-btn" onclick="closeTimeDrawer()">Cancel</button>
+
+</div>
+
+
+<script>
+
+function openCustomerDrawer() {
+    document.getElementById("customerDrawer").style.display = "flex";
+
+    setTimeout(() => {
+        document.getElementById("customerDrawer").classList.add("open");
+    }, 10);
+}
+
+function closeCustomerDrawer() {
+    const drawer = document.getElementById("customerDrawer");
+    drawer.classList.remove("open");
+
+    setTimeout(() => {
+        drawer.style.display = "none";
+    }, 300);
+}
+
+
+function selectCustomer(name, phone, email) {
+    document.getElementById("custName").textContent = "Name: " + name;
+    document.getElementById("custPhone").textContent = "Contact: " + phone;
+    document.getElementById("custEmail").textContent = "Email: " + email;
+
+    closeCustomerDrawer();
+}
+
+
+const customerData = [
+    { name: "John Doe", phone: "9876543210", email: "john@example.com" },
+    { name: "Sarah Lee", phone: "9871112222", email: "sarah@example.com" },
+    { name: "David Mark", phone: "9992223333", email: "david@example.com" },
+    { name: "Emily Clark", phone: "9901122334", email: "emily@example.com" },
+    { name: "Michael Rob", phone: "9797979797", email: "mike@example.com" }
+];
+
+function loadCustomerList() {
+    const listContainer = document.getElementById("customerList");
+    listContainer.innerHTML = "";
+
+    customerData.forEach(cust => {
+        const div = document.createElement("div");
+        div.className = "drawer-item";
+        div.onclick = () => selectCustomer(cust.name, cust.phone, cust.email);
+        div.innerHTML = `
+            <i class="material-icons drawer-avatar">person</i>
+            <div>
+                <strong>${cust.name}</strong><br>
+                <small>${cust.phone}</small>
+            </div>
+        `;
+        listContainer.appendChild(div);
+    });
+}
+
+function openCustomerDrawer() {
+    loadCustomerList(); //  Load JSON data every time drawer opens
+
+    document.getElementById("customerDrawer").style.display = "flex";
+    setTimeout(() => {
+        document.getElementById("customerDrawer").classList.add("open");
+    }, 10);
+}
+
+function filterCustomers() {
+    const searchValue = document.getElementById("customerSearch").value.toLowerCase();
+    const listContainer = document.getElementById("customerList");
+
+    listContainer.innerHTML = "";
+
+    customerData
+        .filter(cust =>
+            cust.name.toLowerCase().includes(searchValue) ||
+            cust.phone.includes(searchValue) ||
+            cust.email.toLowerCase().includes(searchValue)
+        )
+        .forEach(cust => {
+            const div = document.createElement("div");
+            div.className = "drawer-item";
+            div.onclick = () => selectCustomer(cust.name, cust.phone, cust.email);
+
+            div.innerHTML = `
+                <i class="material-icons drawer-avatar">person</i>
+                <div>
+                    <strong>${cust.name}</strong><br>
+                    <small>${cust.phone}</small>
+                </div>
+            `;
+            listContainer.appendChild(div);
+        });
+}
+
+const paymentOptions = [
+    { method: "Cash", icon: "payments", status: "Paid" },
+    { method: "Credit / Debit Card", icon: "credit_card", status: "Paid" },
+    { method: "Online / UPI", icon: "qr_code_scanner", status: "Paid" }
+];
+
+function openPaymentDrawer() {
+    loadPaymentList();
+
+    const drawer = document.getElementById("paymentDrawer");
+    drawer.style.display = "flex";
+
+    setTimeout(() => drawer.classList.add("open"), 10);
+}
+
+function closePaymentDrawer() {
+    const drawer = document.getElementById("paymentDrawer");
+    drawer.classList.remove("open");
+
+    setTimeout(() => drawer.style.display = "none", 200);
+}
+
+function loadPaymentList() {
+    const container = document.getElementById("paymentList");
+    container.innerHTML = "";
+
+    paymentOptions.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "drawer-item";
+
+        div.onclick = () => {
+            selectPayment(item.method, "60 USD", item.status);
+            closePaymentDrawer();
+        };
+
+        div.innerHTML = `
+            <i class="material-icons drawer-avatar">${item.icon}</i>
+            <div>
+                <strong>${item.method}</strong><br>
+                <small>Status: ${item.status}</small>
+            </div>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+function selectPayment(method, amount, status) {
+    document.getElementById("selectedMethod").textContent = method;
+    document.getElementById("selectedAmount").textContent = amount;
+    document.getElementById("selectedStatus").textContent = status;
+}
+
+// Drawer Open/Close
+function openTimeDrawer() {
+    document.getElementById("timeDrawer").classList.add("open");
+}
+function closeTimeDrawer() {
+    document.getElementById("timeDrawer").classList.remove("open");
+}
+
+// TIME SLOT SELECTION
+let selectedSlot = "";
+document.querySelectorAll(".slot").forEach(slot => {
+    slot.addEventListener("click", () => {
+        document.querySelectorAll(".slot").forEach(s => s.classList.remove("selected"));
+        slot.classList.add("selected");
+        selectedSlot = slot.textContent;
+    });
+});
+
+// CALENDAR GENERATION
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+const monthNames = [
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December"
+];
+
+function loadCalendar() {
+    const monthLabel = document.getElementById("calendarMonth");
+    const grid = document.getElementById("calendarGrid");
+
+    monthLabel.textContent = monthNames[currentMonth] + " " + currentYear;
+    grid.innerHTML = "";
+
+    let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    // Blank cells
+    for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement("div");
+        blank.classList.add("empty");
+        grid.appendChild(blank);
+    }
+
+    // Dates
+    for (let d = 1; d <= daysInMonth; d++) {
+        let cell = document.createElement("div");
+        cell.textContent = d;
+
+        cell.onclick = () => {
+            document.querySelectorAll("#calendarGrid div")
+                .forEach(c => c.classList.remove("selected"));
+
+            cell.classList.add("selected");
+
+            selectedDate = new Date(currentYear, currentMonth, d);
+        };
+
+        grid.appendChild(cell);
+    }
+}
+
+document.getElementById("nextMonth").onclick = () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    loadCalendar();
+};
+
+document.getElementById("prevMonth").onclick = () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    loadCalendar();
+};
+
+loadCalendar();
+
+// APPLY BUTTON → Update Main Page
+function applyTimeSelection() {
+    if (selectedDate)
+        document.getElementById("dateInput").textContent =
+            selectedDate.toDateString();
+
+    if (selectedSlot)
+        document.getElementById("timeInput").textContent = selectedSlot;
+
+    document.getElementById("durationInput").textContent = "1 Hour";
+
+    closeTimeDrawer();
+}
+
+</script>
+<script>
+
+function confirmBookingFromCreatePage() {
+
+
+    // ---------------- SERVICE INFO ----------------
+    const serviceName = document.getElementById("serviceName")?.textContent || "";
+    const serviceDuration = document.getElementById("durationInput")?.textContent || "";
+    const servicePrice = document.getElementById("servicePrice")?.textContent || "";
+
+    // ---------------- DATE & TIME ----------------
+    const selectedDate = document.getElementById("dateInput")?.textContent || "";
+    const selectedTime = document.getElementById("timeInput")?.textContent || "";
+    const selectedDuration = document.getElementById("durationInput")?.textContent || "";
+
+    // ---------------- CUSTOMER INFO ----------------
+    const customerName = document.getElementById("custName")?.textContent || "";
+    const customerPhone = document.getElementById("custPhone")?.textContent || "";
+    const customerEmail = document.getElementById("custEmail")?.textContent || "";
+
+    // ---------------- PAYMENT INFO ----------------
+    const paymentMethod = document.getElementById("selectedMethod")?.textContent || "";
+    const paymentAmount = document.getElementById("selectedAmount")?.textContent || "";
+    const paymentStatus = document.getElementById("selectedStatus")?.textContent || "";
+
+    // ---------------- BOOKING DATA OBJECT ----------------
+    const bookingData = {
+        bookingId: "BK-" + Date.now(),  // simple generated ID
+
+        service: {
+            name: serviceName,
+            duration: serviceDuration,
+            price: servicePrice
+        },
+
+        datetime: {
+            date: selectedDate,
+            time: selectedTime,
+            duration: selectedDuration
+        },
+
+        customer: {
+            name: customerName,
+            phone: customerPhone,
+            email: customerEmail
+        },
+
+        payment: {
+            method: paymentMethod,
+            amount: paymentAmount,
+            status: paymentStatus
+        }
+    };
+
+   // Show a summary alert for demo purpose
+    //alert("All booking data captured successfully:\n\n" + JSON.stringify(bookingData, null, 2));
+
+    const encoded = btoa(JSON.stringify(bookingData));
+
+    window.location.href = "createconfirmation.html?data=" + encoded;
+}
+
+</script>
+
+<script>
+window.onload = function() {
+    // get URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const data = urlParams.get("data");
+
+    // convert back to object
+    const service = JSON.parse(decodeURIComponent(data));
+
+    // fill UI elements
+    document.getElementById("serviceName").innerText = service.name;
+    document.getElementById("durationInput").innerText = service.duration;
+    document.getElementById("servicePrice").innerText = "$ " + service.price;
+    document.getElementById("serviceImage").src = service.image;
+}
+</script>
+
+
+
+
+</body>
+</html>

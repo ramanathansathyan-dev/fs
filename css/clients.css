@@ -1,0 +1,388 @@
+/* ===== Clients Toolbar ===== */
+.clients-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Toolbar actions: search + add button */
+.toolbar-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Search input */
+.toolbar-actions input {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+.toolbar-actions input:focus { border-color: #1E90FF; }
+
+/* Add button */
+.toolbar-actions .add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #1E90FF;
+  color: white;
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toolbar-actions .add-btn:hover { background-color: #0066cc; }
+
+/* ===== Table (Flat Design) ===== */
+.client-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.client-table th, 
+.client-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.client-table th {
+  background-color: #f5f5f5;
+  color: #333;
+  font-weight: 600;
+}
+
+.client-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.client-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* Edit button/icon in table & cards - Blue */
+.edit-btn { 
+  cursor: pointer; 
+  color: #1E90FF;  
+  font-size: 20px; 
+}
+.edit-btn:hover { color: #0066cc; }
+
+/* ===== Mobile Cards ===== */
+.client-cards { 
+  display: none; /* Hidden by default */
+  flex-direction: column; 
+  gap: 15px; 
+}
+
+.client-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.client-card .edit-btn { align-self: flex-end; }
+
+/* ===== Load More Button ===== */
+#loadMoreBtn {
+  display: block;
+  margin: 20px auto;
+  background-color: #1E90FF;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#loadMoreBtn:hover { background-color: #0066cc; }
+
+/* ===== Modal ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  font-size: 28px;
+}
+.modal-close:hover { color: #f5141f; }
+
+.modal-content label { font-weight: 600; margin-top: 15px; }
+.modal-content input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 6px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+/* Modal buttons */
+.btn.save { 
+  background-color: #1E90FF; 
+  color: #fff; 
+  border: none; 
+  border-radius: 12px; 
+  padding: 12px 20px; 
+  cursor: pointer; 
+  transition: background 0.2s;
+}
+.btn.save:hover { background-color: #0066cc; }
+
+.btn.cancel { 
+  background-color: #e0e0e0; 
+  border-radius: 12px; 
+  padding: 12px 20px; 
+  border: none; 
+  cursor: pointer; 
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .client-table { display: none; } /* Hide table */
+  .client-cards { display: flex; } /* Show cards */
+  .toolbar-actions { flex-direction: column; gap: 10px; } /* stack search + button */
+}
+
+@media screen and (max-width: 1440px) {
+    /* Apply max-width and margin to all direct children except toolbar */
+      .content > div {
+        max-width: 1440px;  
+        margin: 5px auto;          
+    }
+
+}
+
+
+/* -----------------------------------------------------
+   GLOBAL WRAPPER (Header + Nav + Footer + Content)
+----------------------------------------------------- */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  /* fill entire page height */
+}
+
+/* -----------------------------------------------------
+   MAIN CONTENT AREA (Between header & footer)
+----------------------------------------------------- */
+.content-wrapper {
+  flex: 1;                       /* take remaining vertical space */
+  display: flex;
+  justify-content: center;       /* center horizontally */
+  align-items: center;           /* center vertically */
+  padding: 2rem;                 /* space around content */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* -----------------------------------------------------
+   CARD CONTAINER (Responsive Form Card)
+----------------------------------------------------- */
+.client-card-wrapper {
+  width: 100%;
+  max-width: 900px;              /* wider on desktop */
+  min-width: 300px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  /* EXPAND HEIGHT NATURALLY ON LARGE SCREENS */
+  min-height: 70vh;              /* fills vertical space */
+  box-sizing: border-box;
+}
+
+/* -----------------------------------------------------
+   FORM INSIDE THE CARD
+----------------------------------------------------- */
+.add-client-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;                  /* fill available card space */
+}
+
+/* -----------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+----------------------------------------------------- */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+
+  .client-card-wrapper {
+    width: 90%;                 /* reduce empty side space */
+    min-height: 65vh;
+    padding: 1.8rem;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .client-card-wrapper {
+    width: 100%;
+    padding: 1rem;
+    min-height: auto;           /* fit content naturally on mobile */
+    border-radius: 0;           /* mobile full-width clean look */
+  }
+}
+
+/* ------------------------------
+   FORM — Compact Top Fields
+   Buttons Fixed at Bottom
+------------------------------ */
+
+.add-client-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  /* Keep fields compact at top */
+  justify-content: flex-start;
+}
+
+/* Label styling */
+.add-client-form label {
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Input styling */
+.add-client-form input {
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+/* First field has smaller top margin */
+.add-client-form label:first-child {
+  margin-top: 0;
+}
+
+/* BUTTON SECTION — always at bottom */
+.form-buttons {
+  margin-top: auto;                  /* PUSHES BUTTONS TO BOTTOM */
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  padding-top: 1.5rem;               /* small separation from last input */
+}
+
+/* Buttons */
+.form-buttons button {
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+#cancelAddClientBtn {
+  background: #c7c7c7;
+}
+
+#saveAddClientBtn {
+  background: #4CAF50;
+  color: white;
+}
+
+/* MOBILE: stack buttons */
+@media (max-width: 600px) {
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .form-buttons button {
+    width: 100%;
+  }
+}
+
+
+/* HEADER INSIDE CARD */
+.card-header {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* BLUE "ADD" BUTTON */
+#saveAddClientBtn {
+  background: #1E88E5;    /* Blue color */
+  color: white;
+}
+
+#saveAddClientBtn:hover {
+  background: #166fbd;    /* Darker blue hover */
+}
+
+/* Cancel Button */
+#cancelAddClientBtn {
+  background: #c7c7c7;
+}
+
+#cancelAddClientBtn:hover {
+  background: #b3b3b3;
+}
+
+
+

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports - Fitness Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/report.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="header-middle">
+      Fitness Studio
+    </div>
+    <div class="header-right">
+      Receptionist | <a href="login.html">Logout</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="mainmenu.html">Dashboard</a>
+    <a href="services.html">Services</a>
+    <a href="membershipplans.html">Plans</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="reports.html" class="active">Reports</a>
+    <a href="clients.html">Clients</a>
+   <!-- <a href="qrcode.html">QR Code</a>-->
+  </nav>
+
+  <!-- Content -->
+  <main class="content">
+    <!--<h2 style="color:red; margin-bottom:20px;">Reports</h2>-->
+
+    <!-- Summary Cards -->
+    <div class="report-summary-row">
+      <div class="report-summary-card">
+        <h3>120</h3>
+        <p>Total Bookings</p>
+      </div>
+      <div class="report-summary-card">
+        <h3>95</h3>
+        <p>Paid</p>
+      </div>
+      <div class="report-summary-card">
+        <h3>25</h3>
+        <p>Unpaid</p>
+      </div>
+      <div class="report-summary-card">
+        <h3>Yoga</h3>
+        <p>Top Service</p>
+      </div>
+    </div>
+
+    <!-- Chart Cards -->
+    <div class="report-summary-row">
+      <div class="chart-card">
+        <canvas id="paymentChart"></canvas>
+        <p>Payments Overview</p>
+      </div>
+      <div class="chart-card">
+        <canvas id="serviceChart"></canvas>
+        <p>Top Services</p>
+      </div>
+    </div>
+
+    <!-- Report Cards -->
+    <div class="report-cards-row">
+
+      <div class="report-card">
+        <h4>Report #001</h4>
+        <p><strong>Client:</strong> John Doe</p>
+        <p><strong>Service:</strong> Yoga</p>
+        <p><strong>Date:</strong> 2025-12-01</p>
+        <p><strong>Payment:</strong> <span class="badge badge-paid">Paid</span></p>
+        <div class="btn-container">
+          <button class="btn btn-primary">View Details</button>
+          <button class="btn btn-gray"
+            onclick="location.href='sendemail.html?client=John%20Doe&service=Yoga&slot=2025-12-01'">
+            Send Email
+          </button>
+        </div>
+      </div>
+
+      <div class="report-card">
+        <h4>Report #002</h4>
+        <p><strong>Client:</strong> Sarah Lee</p>
+        <p><strong>Service:</strong> Zumba</p>
+        <p><strong>Date:</strong> 2025-12-02</p>
+        <p><strong>Payment:</strong> <span class="badge badge-unpaid">Unpaid</span></p>
+        <div class="btn-container">
+          <button class="btn btn-primary">View Details</button>
+          <button class="btn btn-gray"
+            onclick="location.href='sendemail.html?client=Sarah%20Lee&service=Zumba&slot=2025-12-02'">
+            Send Email
+          </button>
+        </div>
+      </div>
+
+      <div class="report-card">
+        <h4>Report #003</h4>
+        <p><strong>Client:</strong> Michael Smith</p>
+        <p><strong>Service:</strong> Pilates</p>
+        <p><strong>Date:</strong> 2025-12-03</p>
+        <p><strong>Payment:</strong> <span class="badge badge-paid">Paid</span></p>
+        <div class="btn-container">
+          <button class="btn btn-primary">View Details</button>
+          <button class="btn btn-gray"
+            onclick="location.href='sendemail.html?client=Michael%20Smith&service=Pilates&slot=2025-12-03'">
+            Send Email
+          </button>
+        </div>
+      </div>
+
+      <div class="report-card">
+        <h4>Report #004</h4>
+        <p><strong>Client:</strong> Emma Brown</p>
+        <p><strong>Service:</strong> CrossFit</p>
+        <p><strong>Date:</strong> 2025-12-04</p>
+        <p><strong>Payment:</strong> <span class="badge badge-paid">Paid</span></p>
+        <div class="btn-container">
+          <button class="btn btn-primary">View Details</button>
+          <button class="btn btn-gray"
+            onclick="location.href='sendemail.html?client=Emma%20Brown&service=CrossFit&slot=2025-12-04'">
+            Send Email
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Fitness Studio. All rights reserved.
+  </footer>
+
+</div>
+
+<script>
+// Payments Pie Chart
+const ctxPayment = document.getElementById('paymentChart').getContext('2d');
+new Chart(ctxPayment, {
+    type: 'pie',
+    data: {
+        labels: ['Paid', 'Unpaid'],
+        datasets: [{
+            data: [95, 25],
+            backgroundColor: ['#28a745', '#dc3545']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+    }
+});
+
+// Top Services Bar Chart
+const ctxService = document.getElementById('serviceChart').getContext('2d');
+new Chart(ctxService, {
+    type: 'bar',
+    data: {
+        labels: ['Yoga', 'Zumba', 'Pilates', 'CrossFit'],
+        datasets: [{
+            label: 'Bookings',
+            data: [40, 30, 25, 25],
+            backgroundColor: '#F5141F'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Confirmation Email - Fitness Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="header-middle">Fitness Studio</div>
+    <div class="header-right">
+      Receptionist | <a href="login.html">Logout</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="mainmenu.html">Dashboard</a>
+    <a href="services.html">Services</a>
+    <a href="membershipplans.html">Membership Plans</a>
+    <a href="booking.html">Booking</a>
+    <a href="reports.html">Reports</a>
+    <a href="qrcode.html">QR Code</a>
+  </nav>
+
+  <!-- Content -->
+  <main class="content">
+    <h2 style="color:#F5141F; margin-bottom:20px;">Email Preview</h2>
+
+    <div style="max-width:500px; margin:0 auto; background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+
+      <div id="emailContent" style="text-align:left;"></div>
+
+      <button class="book-btn" id="sendBtn" style="margin-top:15px;">Send Email</button>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Fitness Studio. All rights reserved.
+  </footer>
+
+</div>
+
+<!-- Include QRCode.js to generate QR in email preview -->
+<script src="js/qrcode.js"></script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const client = urlParams.get('client');
+  const service = urlParams.get('service');
+  const slot = urlParams.get('slot');
+
+  const emailContent = document.getElementById('emailContent');
+
+  if(client && service && slot){
+    emailContent.innerHTML = `
+      <p>Dear <strong>${client}</strong>,</p>
+      <p>Thank you for booking a service with <strong>Fitness Studio</strong>. Here are your booking details:</p>
+      <p><strong>Service / Plan:</strong> ${service}</p>
+      <p><strong>Time Slot:</strong> ${slot}</p>
+      <p>Please present the QR code below at the reception for check-in:</p>
+      <div id="qrEmail" style="margin:10px 0;"></div>
+      <p>We look forward to seeing you!</p>
+      <p>Best Regards,<br>Fitness Studio Team</p>
+    `;
+
+    new QRCode(document.getElementById('qrEmail'), {
+      text: `${client} - ${service} - ${slot}`,
+      width: 150,
+      height: 150
+    });
+  } else {
+    emailContent.innerHTML = '<p style="color:red;">Booking information not found.</p>';
+  }
+
+  document.getElementById('sendBtn').addEventListener('click', function(){
+    if(client && service && slot){
+      alert('Confirmation email sent successfully to ' + client);
+      window.location.href = 'mainmenu.html';
+    } else {
+      alert('No booking info available to send email.');
+    }
+  });
+</script>
+
+</body>
+</html>

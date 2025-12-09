@@ -1,0 +1,222 @@
+/* ==============================
+   GLOBAL BOOKINGS PAGE STYLES
+   ============================== */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.content {
+  padding: 20px;
+}
+
+/* ------------------------------
+   TOOLBAR (HEADER + SEARCH + ADD)
+   ------------------------------ */
+.page-header,
+.search-add-bar {
+  background-color: #fff; /* white background */
+  border: 1px solid #fff; /* gray border */
+  padding: 12px 16px;
+  border-radius: 4px; /* subtle rounded corners */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  
+}
+
+
+/* Heading section inside toolbar */
+.bookings-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid gray;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.page-header {
+  flex: 1;
+  justify-content: space-between;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Search input */
+.search-add-bar input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+/* Add button styling */
+.search-add-bar .add-btn {
+  background-color: #0078ff;
+  color: #fff;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-add-bar .add-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ------------------------------
+   TABLE STYLES
+   ------------------------------ */
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.booking-table th,
+.booking-table td {
+  padding: 12px 10px;
+  border: 1px solid #ccc; /* flat borders */
+  text-align: left;
+  font-size: 14px;
+}
+
+.booking-table th {
+  background-color: #f1f1f1;
+  font-weight: 600;
+}
+
+.booking-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* QR code icon */
+.qr-icon {
+  cursor: pointer;
+  color: #0078ff;
+}
+
+/* ------------------------------
+   MOBILE CARDS
+   ------------------------------ */
+.booking-cards {
+  display: none; /* hidden on desktop */
+}
+
+.booking-card {
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: #fff;
+}
+
+.booking-card-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.booking-card-row {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.booking-card-actions {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.qr-icon-card {
+  cursor: pointer;
+  color: #0078ff;
+}
+
+/* ------------------------------
+   STATUS TEXT COLORS (NO BG)
+   ------------------------------ */
+.status-badge {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+/* Colors only */
+.status-pending { color: #d89100; }       /* gold/amber */
+.status-confirmed { color: #0078ff; }     /* blue */
+.status-checkedin { color: #0fad02; }     /* green */
+.status-cancelled { color: #d63939; }     /* red */
+
+/* ------------------------------
+   LOAD MORE BUTTON
+   ------------------------------ */
+#loadMoreBtn {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #0078ff;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#loadMoreBtn:hover {
+  background-color: #0056b3;
+}
+
+/* ------------------------------
+   RESPONSIVE
+   ------------------------------ */
+@media (max-width: 768px) {
+  .booking-table { display: none; }
+  .booking-cards { display: block; }
+}
+
+
+@media screen and (max-width: 1440px) {
+    /* Apply max-width and margin to all direct children except toolbar */
+      .content > div {
+        max-width: 1440px;  
+        margin: 5px auto;          
+    }
+
+}
+/* Bookings page toolbar - reduce gap and padding globally */
+.bookings-toolbar {
+    display: flex;
+    flex-direction: column;  /* keep header above search bar */
+    gap: 0px;                /* remove vertical gap */
+    padding: 5px;            /* reduce internal padding */
+}
+
+/* Remove extra margin from child elements */
+.bookings-toolbar .page-header,
+.bookings-toolbar .search-add-bar {
+    margin: 0;
+    padding: 5px;           /* reduce child padding if needed */
+}
+
+
+

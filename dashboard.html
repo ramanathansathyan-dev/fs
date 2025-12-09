@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Fitness Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="header-middle">
+      Fitness Studio
+    </div>
+    <div class="header-right">
+      Receptionist | <a href="login.html">Logout</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="mainmenu.html">Menu</a>
+    <a href="services.html">Services</a>
+    <a href="membershipplans.html">Plans</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="reports.html">Reports</a>
+    <a href="clients.html">Clients</a>
+    <a class="active" href="dashboard.html">Dashboard</a>
+   <!-- <a href="qrcode.html">QR Code</a>-->
+  </nav>
+
+  <!-- Content -->
+  <main class="content dashboard-content">
+
+    <!-- Summary Metrics -->
+    <!--<h2 style="color:#F5141F; margin-bottom:20px; font-size:18px;">Today’s Key Metrics</h2>-->
+
+    <div class="dashboard-metrics">
+      <div class="metric-card">
+        <i class="material-icons">event_available</i>
+        <h4>Today's Bookings</h4>
+        <p>12</p>
+      </div>
+
+      <div class="metric-card">
+        <i class="material-icons">attach_money</i>
+        <h4>Revenue Collected</h4>
+        <p>$1,250</p>
+      </div>
+
+      <div class="metric-card">
+        <i class="material-icons">pending</i>
+        <h4>Pending Payments</h4>
+        <p>3</p>
+      </div>
+
+      <div class="metric-card">
+        <i class="material-icons">card_membership</i>
+        <h4>Active Memberships</h4>
+        <p>45</p>
+      </div>
+
+      <div class="metric-card">
+        <i class="material-icons">person_add</i>
+        <h4>New Members</h4>
+        <p>5</p>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <!--<h2 style="color:#F5141F; margin:30px 0 10px; font-size:18px;">Analytics</h2>-->
+
+    <div class="dashboard-charts-row">
+
+      <!-- Revenue Chart -->
+      <div class="chart-card">
+        <h3 class="chart-title">Weekly Revenue</h3>
+        <canvas id="revenueChart"></canvas>
+      </div>
+
+      <!-- Service Chart WITHOUT Legend -->
+      <div class="chart-card">
+        <h3 class="chart-title">Service Popularity</h3>
+        <canvas id="serviceChart"></canvas>
+      </div>
+
+    </div>
+
+    <!-- Quick Action Cards -->
+    <!--<h2 style="color:#F5141F; margin:35px 0 10px; font-size:18px;">Quick Actions</h2>-->
+
+    <div class="dashboard-quick">
+
+      <div class="quick-card">
+        <i class="material-icons">event_available</i>
+        <h5>Book Service</h5>
+        <button onclick="window.location.href='services.html'">Book</button>
+      </div>
+
+      <div class="quick-card">
+        <i class="material-icons">qr_code</i>
+        <h5>Generate QR Code</h5>
+        <button onclick="window.location.href='bookings.html'">Generate</button>
+      </div>
+
+      <!--<div class="quick-card">
+        <i class="material-icons">email</i>
+        <h5>Send Email</h5>
+        <button onclick="window.location.href='sendemail.html'">Send</button>
+      </div>-->
+
+    </div>
+
+    <!-- Upcoming Appointments -->
+   <!-- <h2 style="color:#F5141F; margin:40px 0 10px; font-size:18px;">Upcoming Appointments</h2>-->
+  <div class="quick-card">
+    <table class="dashboard-table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Service</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>Yoga</td>
+          <td>10:00 AM</td>
+          <td style="color:green;">Paid</td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>Cardio</td>
+          <td>11:00 AM</td>
+          <td style="color:red;">Pending</td>
+        </tr>
+        <tr>
+          <td>Alice Johnson</td>
+          <td>Pilates</td>
+          <td>12:30 PM</td>
+          <td style="color:green;">Paid</td>
+        </tr>
+      </tbody>
+    </table>
+	</div>
+  </main>
+
+  <footer>
+    © 2025 Fitness Studio. All rights reserved.
+  </footer>
+
+</div>
+
+<!-- CHART JS LOGIC -->
+<script>
+// Weekly Revenue Chart
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    datasets: [{
+      label: 'Revenue ($)',
+      data: [200,300,250,400,350,500,450],
+      backgroundColor: '#F5141F'
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false }},
+    responsive: true,
+    scales: { y: { beginAtZero: true }}
+  }
+});
+
+// Service Popularity WITHOUT LEGEND
+new Chart(document.getElementById('serviceChart'), {
+  type: 'pie',
+  data: {
+    labels: ['Yoga','Cardio','Pilates','Zumba','Crossfit'],
+    datasets: [{
+      data: [5,3,4,2,1],
+      backgroundColor: ['#F5141F','#2196F3','#FF9800','#9C27B0','#4CAF50']
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },  // 🚫 Legend removed
+      title: { display: false }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

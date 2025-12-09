@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bookings - Fitness Studio</title>
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="css/bookings.css" />
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="header-middle">Fitness Studio</div>
+    <div class="header-right">Receptionist | <a href="login.html">Logout</a></div>
+  </div>
+
+   <!-- Navigation -->
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="membershipplans.html">Plans</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="reports.html">Reports</a>
+        <a href="clients.html">Clients</a>
+       <!-- <a href="qrcode.html">QR Code</a>-->
+    </nav>
+
+  <main class="content">
+
+	<!-- Toolbar Container -->
+	<div class="bookings-toolbar">
+		<!-- Page Header -->
+		 <div class="page-header">
+		  <h2>Bookings</h2>
+		</div>
+
+		<!-- Search + Add Booking -->
+		<div class="search-add-bar">
+		  <input type="text" id="bookingSearch" placeholder="Search bookings by ID, client or service...">
+		  <a href="add-booking.html" class="add-btn">
+			<span class="material-symbols-rounded">add</span>
+		  </a>
+		</div>
+	</div>
+
+    <!-- Desktop Table -->
+    <table class="booking-table">
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Client Name</th>
+          <th>Service</th>
+          <th>Time Slot</th>
+          <th>Status</th>
+          <th>QR Code</th>
+        </tr>
+      </thead>
+      <tbody id="bookingTableBody">
+        <!-- Dynamic rows populated via JS -->
+      </tbody>
+    </table>
+
+    <!-- Mobile Cards -->
+    <div class="booking-cards" id="bookingCards">
+      <!-- Dynamic cards populated via JS -->
+    </div>
+
+    <!-- Load More -->
+    <button id="loadMoreBtn" class="btn save">Load More</button>
+
+  </main>
+
+  <footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+</div>
+
+<!-- Page JS -->
+<script src="js/bookings.js"></script>
+
+</body>
+</html>

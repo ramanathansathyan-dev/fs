@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmation - Fitness Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="header-middle">
+      Fitness Studio
+    </div>
+    <div class="header-right">
+      Receptionist | <a href="login.html">Logout</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="mainmenu.html">Dashboard</a>
+    <a href="services.html">Services</a>
+    <a href="membershipplans.html">Membership Plans</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="reports.html">Reports</a>
+    <a href="qrcode.html">QR Code</a>
+    <a href="confirmation.html">Confirmation</a>
+    <a href="clients.html">Clients</a>
+  </nav>
+
+  <!-- Content -->
+  <main class="content">
+    <h2 style="color:red; margin-bottom:20px;">Booking Confirmation</h2>
+
+    <div style="max-width:500px; margin:0 auto; background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2); text-align:center;">
+      <p>Booking has been confirmed!</p>
+      <p><strong>Client:</strong> John Doe</p>
+      <p><strong>Service:</strong> Yoga</p>
+      <p><strong>Time Slot:</strong> 2025-12-05 10:00</p>
+
+      <div id="qrContainer" style="margin:20px auto;"></div>
+      <button class="book-btn" id="sendEmailBtn">Send Confirmation Email</button>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Fitness Studio. All rights reserved.
+  </footer>
+
+</div>
+
+<!-- Include QRCode.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  // Generate QR Code for confirmation
+  new QRCode(document.getElementById("qrContainer"), {
+    text: "John Doe - Yoga - 2025-12-05 10:00",
+    width: 150,
+    height: 150
+  });
+
+  document.getElementById('sendEmailBtn').addEventListener('click', function(){
+    alert('Confirmation email sent to client with booking details and QR code.');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Email Preview - Fitness Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+
+<style>
+  /* Reset & base */
+  body {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+}
+  a {
+    text-decoration: none;
+  }
+
+  /* Header styling same as your site */
+  header .login-header {
+    background: #fff;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  }
+  header .header-left img {
+    height: 40px;
+  }
+  header .header-middle {
+    font-weight: bold;
+    font-size: 20px;
+    color: #222;
+  }
+  header .header-right a {
+    color: #007bff;
+  }
+
+  /* Navigation */
+  nav.nav
+   {
+      background: #e0484b;
+      display: flex;
+     /* gap: 15px;*/
+     /* padding: 10px 20px;*/
+}
+
+ nav.nav a {
+      color: #fff;
+      /* font-weight: 600; */
+      /* font-size: 14px; */
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+}
+
+  nav.nav a:hover {
+    background: rgba(255 255 255 / 0.2);
+  }
+
+  /* Footer */
+  footer {
+      background: #222;
+      text-align: center;
+      padding: 12px 20px;
+      margin-top: auto;
+      font-size: 14px;
+      color: #fff;
+      box-shadow: 0 -2px 5px rgb(0 0 0 / 0.1);
+}
+
+  /* MAIN container */
+  .email-preview-container {
+    background: #fff;
+    max-width: 400px;
+    margin: 40px auto 80px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+
+  /* EMAIL TEMPLATE styling */
+  .email-header {
+    padding: 24px 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  #emailLogo {
+    height: 30px;
+  }
+  .email-header-text {
+    font-weight: 700;
+    font-size: 18px;
+    color: #222;
+  }
+  .email-subtitle {
+    font-size: 14px;
+    color: #444;
+    padding: 0 20px 20px;
+  }
+
+  /* QR code image */
+  .email-qr {
+    width: 100%;
+    max-width: 360px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Description text under QR */
+  .email-description {
+    padding: 20px 20px 12px;
+    color: #222;
+    font-size: 14px;
+    line-height: 1.4;
+    border-bottom: 1px solid #ddd;
+  }
+  .email-description p {
+    margin: 6px 0;
+  }
+  .email-description strong {
+    font-weight: 600;
+  }
+  .email-description small {
+    color: #666;
+  }
+
+  /* Dates section */
+  .email-dates {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 20px;
+    font-size: 13px;
+    color: #222;
+  }
+  .date-block {
+    width: 48%;
+  }
+  .date-day {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .date-info {
+    color: #666;
+    line-height: 1.2;
+  }
+  /* Divider slash in middle */
+  .date-divider {
+    width: 4%;
+    border-left: 1px solid #ddd;
+    margin-top: 10px;
+  }
+
+  /* Button */
+  .email-button {
+    display: block;
+    background: #ff5a5f;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 0;
+    margin: 0 20px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .email-button:hover {
+    background: #e0484b;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .email-preview-container {
+      margin: 20px 12px 60px;
+      max-width: 100%;
+      border-radius: 6px;
+      box-shadow: none;
+    }
+    .email-dates {
+      flex-direction: column;
+      gap: 14px;
+    }
+    .date-divider {
+      display: none;
+    }
+    .date-block {
+      width: 100%;
+    }
+    .email-description {
+      padding: 16px 16px 10px;
+      font-size: 13px;
+    }
+    .email-header {
+      padding: 18px 16px 12px;
+    }
+  }
+  @media (min-width: 481px) and (max-width: 992px) {
+    .email-preview-container {
+      max-width: 380px;
+      margin: 30px auto 70px;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="login-header">
+    <div class="header-left">
+      <img src="assets/images/logo.png" alt="Logo" />
+    </div>
+    <div class="header-middle">Fitness Studio</div>
+    <div class="header-right">
+      Receptionist | <a href="login.html">Logout</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="mainmenu.html">Dashboard</a>
+  <a href="services.html">Services</a>
+  <a href="membershipplans.html">Plans</a>
+  <a href="bookings.html">Bookings</a>
+  <a href="reports.html">Reports</a>
+  <a href="clients.html">Clients</a>
+ <!-- <a href="qrcode.html">QR Code</a>-->
+</nav>
+
+<!-- MAIN EMAIL PREVIEW CONTAINER -->
+<div class="email-preview-container" role="main" aria-label="Email preview section">
+
+  <!-- Email header -->
+  <div class="email-header">
+    <img id="emailLogo" src="" alt="Company logo" />
+    <div class="email-header-text" id="emailTitle">Your booking is confirmed</div>
+  </div>
+
+  <!-- Subtitle -->
+  <div class="email-subtitle" id="emailSubtitle">
+    <!-- Will be replaced dynamically -->
+  </div>
+
+  <!-- QR CODE image -->
+  <img id="emailQRCode" class="email-qr" src="" alt="Booking QR Code" />
+
+  <!-- Description -->
+  <div class="email-description" id="emailDescription">
+    <!-- Booking description here -->
+  </div>
+
+  <!-- Dates section -->
+  <div class="email-dates">
+    <div class="date-block">
+      <div class="date-day" id="dateLeftDay">Tuesday, Oct 24, 2017</div>
+      <div class="date-info" id="dateLeftInfo">Check in Anytime after 3PM</div>
+    </div>
+    <div class="date-divider"></div>
+    <div class="date-block">
+      <div class="date-day" id="dateRightDay">Friday, OCT 27, 2017</div>
+      <div class="date-info" id="dateRightInfo">Check out 11AM</div>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <a href="#" id="emailButtonText" class="email-button" target="_blank" rel="noopener noreferrer">View your Booking</a>
+</div>
+
+<!-- FOOTER -->
+<footer>&copy; 2025 Fitness Studio. All rights reserved.</footer>
+
+<!-- SCRIPT: Load booking data and fill email preview -->
+<script>
+  function loadEmailPreview() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const encoded = urlParams.get("data");
+
+    if (!encoded) {
+      alert("Missing booking data!");
+      return;
+    }
+
+    try {
+      const decoded = atob(encoded);
+      const bookingData = JSON.parse(decoded);
+
+      // Set logo
+      document.getElementById("emailLogo").src = "assets/images/logo.png";
+
+      // Title and subtitle
+      document.getElementById("emailTitle").textContent = "Your booking is confirmed";
+      document.getElementById("emailSubtitle").textContent = `You're going to ${bookingData.service.name}`;
+
+      // QR code (use bookingId)
+      document.getElementById("emailQRCode").src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=" + bookingData.bookingId;
+
+      // Description content (adjust as needed)
+      document.getElementById("emailDescription").innerHTML = `
+        <p><strong>${bookingData.service.name}.</strong> ${bookingData.service.duration}. Price: ${bookingData.service.price}</p>
+        <p>Customer: ${bookingData.customer.name}</p>
+        <small>Contact: ${bookingData.customer.phone} | ${bookingData.customer.email}</small>
+      `;
+
+      // Dates and times
+      const checkInDate = new Date(bookingData.datetime.date + " " + bookingData.datetime.time);
+      const durationHours = parseInt(bookingData.datetime.duration) || 1;
+      const checkOutDate = new Date(checkInDate.getTime() + durationHours * 60 * 60 * 1000);
+
+      // Format check-in date
+      const optionsIn = { weekday: "long", month: "short", day: "numeric", year: "numeric" };
+      const checkInStr = checkInDate.toLocaleDateString(undefined, optionsIn);
+
+      // Format check-out date uppercase
+      //const optionsOut = { weekday: "long", month: "short", day: "numeric", year: "numeric" };
+      //const checkOutStr = checkOutDate.toLocaleDateString(undefined, optionsOut).toUpperCase();
+
+
+
+      // Set dates text
+      //document.getElementById("dateLeftDay").textContent = checkInStr;
+
+       //document.getElementById("dateLeftDay").textContent = checkInStr;
+
+       document.getElementById("dateLeftDay").textContent = `${bookingData.datetime.date}`
+
+       document.getElementById("dateLeftInfo").textContent = `Your time slot  ${bookingData.datetime.time}`;
+
+      //document.getElementById("dateRightDay").textContent = checkOutStr;
+      //document.getElementById("dateRightInfo").textContent = `Check out ${checkOutDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}`;
+
+	   document.getElementById("dateRightDay").textContent = `Payment Mode ${bookingData.payment.method}`;
+	   document.getElementById("dateRightInfo").textContent = `Your amount for the service is ${bookingData.payment.status}`;
+
+
+
+
+      // Button link - replace with real URL if available
+      const button = document.getElementById("emailButtonText");
+      button.href = "#"; // TODO: Set actual itinerary link
+
+    } catch (e) {
+      console.error(e);
+      alert("Invalid booking data!");
+    }
+  }
+
+  window.onload = loadEmailPreview;
+</script>
+
+</body>
+
+</html>
