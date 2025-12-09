@@ -1095,7 +1095,7 @@ window.onload = function() {
 
     // convert back to object
     const service = JSON.parse(decodeURIComponent(data));
-
+	alert(service.image);
     // fill UI elements
     document.getElementById("serviceName").innerText = service.name;
     document.getElementById("durationInput").innerText = service.duration;
@@ -1109,3 +1109,4 @@ window.onload = function() {
 
 </body>
 </html>
+
